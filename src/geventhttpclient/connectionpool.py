@@ -168,7 +168,7 @@ class ConnectionPool:
             return True
         except BlockingIOError:
             return True
-        except (OSError, IOError):
+        except OSError:
             return False
 
     def get_socket(self):
@@ -188,7 +188,7 @@ class ConnectionPool:
                     # Connection is dead, close it and try next
                     try:
                         sock.close()
-                    except:
+                    except:  # noqa
                         pass
             except gevent.queue.Empty:
                 break
